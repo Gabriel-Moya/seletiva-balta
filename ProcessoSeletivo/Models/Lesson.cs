@@ -1,14 +1,11 @@
-﻿using System.ComponentModel;
+﻿using ProcessoSeletivo.Models.Base;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProcessoSeletivo.Models
 {
-    public class Lesson
+    public class Lesson : Content
     {
-        [DisplayName("Título")]
-        [Required(ErrorMessage = "Título é obrigatório")]
-        public string Title { get; set; }
-
         [DisplayName("Descrição")]
         public string Description { get; set; }
 

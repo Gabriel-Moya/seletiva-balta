@@ -1,18 +1,15 @@
-﻿using System.ComponentModel;
+﻿using ProcessoSeletivo.Models.Base;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProcessoSeletivo.Models
 {
-    public class Module
+    public class Module : Content
     {
         public Module()
         {
             Lessons = new List<Lesson>();
         }
-
-        [DisplayName("Título")]
-        [Required(ErrorMessage = "Título é obrigatório")]
-        public string Title { get; set; }
 
         [DisplayName("Descrição")]
         public string Description { get; set; }
@@ -22,6 +19,6 @@ namespace ProcessoSeletivo.Models
         public int DisplayOrder { get; set; }
 
         [DisplayName("Aulas")]
-        public List<Lesson> Lessons { get; set; }
+        public IList<Lesson> Lessons { get; set; }
     }
 }

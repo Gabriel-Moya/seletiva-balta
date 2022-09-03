@@ -1,18 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using ProcessoSeletivo.Models.Base;
 
 namespace ProcessoSeletivo.Models
 {
-    public class Course
+    public class Course : Content
     {
         public Course()
         {
             Modules = new List<Module>();
         }
-
-        [DisplayName("Título")]
-        [Required(ErrorMessage = "Título é obrigatório")]
-        public string Title { get; set; }
 
         [Required(ErrorMessage = "TAG é obrigatória")]
         public int Tag { get; set; }
@@ -25,6 +22,6 @@ namespace ProcessoSeletivo.Models
         public int DurationInMinutes { get; set; }
 
         [DisplayName("Módulos")]
-        public List<Module> Modules { get; set; }
+        public IList<Module> Modules { get; set; }
     }
 }
