@@ -20,5 +20,8 @@ namespace ProcessoSeletivo.Models
 
         [DisplayName("Aulas")]
         public IList<Lesson> Lessons { get; set; }
+
+        [DisplayName("Cursos")]
+        public Course Course { get; set; }
     }
 }
