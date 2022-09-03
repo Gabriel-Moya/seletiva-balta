@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProcessoSeletivo.Models
 {
-    public class Modules
+    public class Module
     {
-        public Modules()
+        public Module()
         {
-            Lessons = new List<Lessons>();
+            Lessons = new List<Lesson>();
         }
 
         [DisplayName("Título")]
@@ -22,6 +22,6 @@ namespace ProcessoSeletivo.Models
         public int DisplayOrder { get; set; }
 
         [DisplayName("Aulas")]
-        public List<Lessons> Lessons { get; set; }
+        public List<Lesson> Lessons { get; set; }
     }
 }

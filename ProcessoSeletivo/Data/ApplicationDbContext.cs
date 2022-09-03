@@ -11,7 +11,7 @@ public class ApplicationDbContext : IdentityDbContext
     {
     }
 
-    DbSet<Lessons> Lessons { get; set; }
-    DbSet<Modules> Modules { get; set; }
+    DbSet<Lesson> Lessons { get; set; }
+    DbSet<Module> Modules { get; set; }
     DbSet<Course> Courses { get; set; }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProcessoSeletivo.Models
 {
-    public class Lessons
+    public class Lesson
     {
         [DisplayName("Título")]
         [Required(ErrorMessage = "Título é obrigatório")]

@@ -7,7 +7,7 @@ namespace ProcessoSeletivo.Models
     {
         public Course()
         {
-            Modules = new List<Modules>();
+            Modules = new List<Module>();
         }
 
         [DisplayName("Título")]
@@ -25,6 +25,6 @@ namespace ProcessoSeletivo.Models
         public int DurationInMinutes { get; set; }
 
         [DisplayName("Módulos")]
-        public List<Modules> Modules { get; set; }
+        public List<Module> Modules { get; set; }
     }
 }
