@@ -27,7 +27,8 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<Course>(builder =>
         {
             builder.HasMany(x => x.Modules)
-                .WithOne();
+                .WithOne(x => x.Course)
+                .HasForeignKey(x => x.CourseId);
         });
 
         //Módulos
@@ -38,7 +39,8 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<Module>(builder =>
         {
             builder.HasMany(x => x.Lessons)
-                .WithOne();
+                .WithOne(x => x.Module)
+                .HasForeignKey(x => x.ModuleId);
         });
 
         //Aulas

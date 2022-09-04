@@ -13,7 +13,9 @@ namespace ProcessoSeletivo.Models
         [Required(ErrorMessage = "URL é obrigatória")]
         public string Url { get; set; }
 
-        //[DisplayName("Módulo")]
-        //public Module Module { get; set; }
+        public Guid ModuleId { get; set; }
+
+        [DisplayName("Módulo")]
+        public virtual Module Module { get; set; }
     }
 }

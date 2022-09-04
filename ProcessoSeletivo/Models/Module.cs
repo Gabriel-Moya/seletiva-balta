@@ -21,7 +21,11 @@ namespace ProcessoSeletivo.Models
         [DisplayName("Aulas")]
         public IList<Lesson> Lessons { get; set; }
 
-        //[DisplayName("Cursos")]
-        //public Course Course { get; set; }
+        [DisplayName("Curso")]
+        [Required(ErrorMessage = "A escolha de um curso é obrigatória")]
+        public Guid CourseId { get; set; }
+
+        [DisplayName("Cursos")]
+        public Course Course { get; set; }
     }
 }
