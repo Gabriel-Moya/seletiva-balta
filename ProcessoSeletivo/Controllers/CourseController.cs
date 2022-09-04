@@ -56,11 +56,11 @@ namespace ProcessoSeletivo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Tag,Summary,DurationInMinutes,Title,Id")] Course course)
+        public async Task<IActionResult> Create([Bind("Title,Tag,DurationInMinutes,Summary")] Course course)
         {
             if (ModelState.IsValid)
             {
-                course.Id = Guid.NewGuid();
+                //course.Id = Guid.NewGuid();
                 _context.Add(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
