@@ -13,7 +13,7 @@ namespace ProcessoSeletivo.Models
         [Required(ErrorMessage = "URL é obrigatória")]
         public string Url { get; set; }
 
-        [DisplayName("Módulo")]
-        public Module Module { get; set; }
+        //[DisplayName("Módulo")]
+        //public Module Module { get; set; }
     }
 }
