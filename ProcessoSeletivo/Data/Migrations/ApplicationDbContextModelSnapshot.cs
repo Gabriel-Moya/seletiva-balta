@@ -248,7 +248,7 @@ namespace ProcessoSeletivo.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("ModuleId")
+                    b.Property<Guid>("ModuleId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -272,7 +272,7 @@ namespace ProcessoSeletivo.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("CourseId")
+                    b.Property<Guid>("CourseId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -346,16 +346,24 @@ namespace ProcessoSeletivo.Data.Migrations
 
             modelBuilder.Entity("ProcessoSeletivo.Models.Lesson", b =>
                 {
-                    b.HasOne("ProcessoSeletivo.Models.Module", null)
+                    b.HasOne("ProcessoSeletivo.Models.Module", "Module")
                         .WithMany("Lessons")
-                        .HasForeignKey("ModuleId");
+                        .HasForeignKey("ModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Module");
                 });
 
             modelBuilder.Entity("ProcessoSeletivo.Models.Module", b =>
                 {
-                    b.HasOne("ProcessoSeletivo.Models.Course", null)
+                    b.HasOne("ProcessoSeletivo.Models.Course", "Course")
                         .WithMany("Modules")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("ProcessoSeletivo.Models.Course", b =>
