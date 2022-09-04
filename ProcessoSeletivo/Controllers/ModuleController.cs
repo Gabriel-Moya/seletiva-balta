@@ -10,11 +10,11 @@ using ProcessoSeletivo.Models;
 
 namespace ProcessoSeletivo.Controllers
 {
-    public class ModulesController : Controller
+    public class ModuleController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ModulesController(ApplicationDbContext context)
+        public ModuleController(ApplicationDbContext context)
         {
             _context = context;
         }
