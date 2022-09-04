@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProcessoSeletivo.Data;
 
@@ -10,9 +11,10 @@ using ProcessoSeletivo.Data;
 namespace ProcessoSeletivo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220904184341_FixMapping")]
+    partial class FixMapping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
@@ -248,7 +250,10 @@ namespace ProcessoSeletivo.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("ModuleId")
+                    b.Property<Guid>("ModuleId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ModuleId1")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -263,6 +268,8 @@ namespace ProcessoSeletivo.Data.Migrations
 
                     b.HasIndex("ModuleId");
 
+                    b.HasIndex("ModuleId1");
+
                     b.ToTable("Lessons");
                 });
 
@@ -272,7 +279,10 @@ namespace ProcessoSeletivo.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("CourseId")
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CourseId1")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -289,6 +299,8 @@ namespace ProcessoSeletivo.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
+
+                    b.HasIndex("CourseId1");
 
                     b.ToTable("Modules");
                 });
@@ -348,14 +360,34 @@ namespace ProcessoSeletivo.Data.Migrations
                 {
                     b.HasOne("ProcessoSeletivo.Models.Module", null)
                         .WithMany("Lessons")
-                        .HasForeignKey("ModuleId");
+                        .HasForeignKey("ModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProcessoSeletivo.Models.Module", "Module")
+                        .WithMany()
+                        .HasForeignKey("ModuleId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Module");
                 });
 
             modelBuilder.Entity("ProcessoSeletivo.Models.Module", b =>
                 {
                     b.HasOne("ProcessoSeletivo.Models.Course", null)
                         .WithMany("Modules")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProcessoSeletivo.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("ProcessoSeletivo.Models.Course", b =>

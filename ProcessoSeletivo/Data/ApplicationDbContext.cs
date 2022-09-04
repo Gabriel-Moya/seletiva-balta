@@ -19,24 +19,30 @@ public class ApplicationDbContext : IdentityDbContext
     {
         //base.OnModelCreating(builder);
 
-        //Aulas
-        builder.Entity<Lesson>(builder =>
+        //Cursos
+        builder.Entity<Course>(builder =>
         {
             builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.Module)
-                .WithMany(x => x.Lessons);
+        });
+        builder.Entity<Course>(builder =>
+        {
+            builder.HasMany(x => x.Modules)
+                .WithOne();
         });
 
         //Módulos
         builder.Entity<Module>(builder =>
         {
             builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.Course)
-                .WithMany(x => x.Modules);
+        });
+        builder.Entity<Module>(builder =>
+        {
+            builder.HasMany(x => x.Lessons)
+                .WithOne();
         });
 
-        //Cursos
-        builder.Entity<Course>(builder =>
+        //Aulas
+        builder.Entity<Lesson>(builder =>
         {
             builder.HasKey(x => x.Id);
         });
