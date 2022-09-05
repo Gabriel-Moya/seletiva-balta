@@ -7,7 +7,7 @@ using ProcessoSeletivo.Data;
 
 #nullable disable
 
-namespace ProcessoSeletivo.Data.Migrations
+namespace ProcessoSeletivo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
