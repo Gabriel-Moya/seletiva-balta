@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <None Update="app.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
