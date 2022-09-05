@@ -4,11 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Módulos disponíveis</h1>
+<hr />
+<input type="button" class="btn btn-primary" value="Criar módulo" onclick="location.href='@Url.Action("Create", "Module" )'" />
+<input type="button" class="btn btn-primary mx-2" value="Criar aula para módulo existente" onclick="location.href='@Url.Action("Create", "Lesson" )'" />
+<hr />
 <table class="table">
     <thead>
         <tr>
@@ -28,26 +28,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DisplayOrder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <input type="button" class="btn btn-primary btn-sm" value="Editar" onclick="location.href='@Url.Action("Edit", "Course", new {id = @item.Id} )'" />
+                    <input type="button" class="btn btn-info btn-sm" value="Detalhes" onclick="location.href='@Url.Action("Details", "Course", new {id = @item.Id} )'" />
+                    <input type="button" class="btn btn-danger btn-sm" value="Excluir" onclick="location.href='@Url.Action("Delete", "Course", new {id = @item.Id} )'" />
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
