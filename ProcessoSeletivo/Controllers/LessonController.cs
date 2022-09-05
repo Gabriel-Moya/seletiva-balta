@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProcessoSeletivo.Data;
 using ProcessoSeletivo.Models;
@@ -17,9 +22,8 @@ namespace ProcessoSeletivo.Controllers
         // GET: Lesson
         public async Task<IActionResult> Index()
         {
-            return _context.Lessons != null ?
-                        View(await _context.Lessons.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Lessons'  is null.");
+            var applicationDbContext = _context.Lessons.Include(l => l.Module);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Lesson/Details/5
@@ -31,6 +35,7 @@ namespace ProcessoSeletivo.Controllers
             }
 
             var lesson = await _context.Lessons
+                .Include(l => l.Module)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lesson == null)
             {
@@ -43,6 +48,7 @@ namespace ProcessoSeletivo.Controllers
         // GET: Lesson/Create
         public IActionResult Create()
         {
+            ViewData["ModuleId"] = new SelectList(_context.Modules, "Id", "Title");
             return View();
         }
 
@@ -51,15 +57,15 @@ namespace ProcessoSeletivo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Url,Description")] Lesson lesson)
+        public async Task<IActionResult> Create([Bind("Description,Url,ModuleId,Title,Id")] Lesson lesson)
         {
             if (ModelState.IsValid)
             {
-                //lesson.Id = Guid.NewGuid();
                 _context.Add(lesson);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ModuleId"] = new SelectList(_context.Modules, "Id", "Title", lesson.ModuleId);
             return View(lesson);
         }
 
@@ -76,6 +82,7 @@ namespace ProcessoSeletivo.Controllers
             {
                 return NotFound();
             }
+            ViewData["ModuleId"] = new SelectList(_context.Modules, "Id", "Title", lesson.ModuleId);
             return View(lesson);
         }
 
@@ -84,7 +91,7 @@ namespace ProcessoSeletivo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Description,Url,Title,Id")] Lesson lesson)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Description,Url,ModuleId,Title,Id")] Lesson lesson)
         {
             if (id != lesson.Id)
             {
@@ -111,6 +118,7 @@ namespace ProcessoSeletivo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ModuleId"] = new SelectList(_context.Modules, "Id", "Title", lesson.ModuleId);
             return View(lesson);
         }
 
@@ -123,6 +131,7 @@ namespace ProcessoSeletivo.Controllers
             }
 
             var lesson = await _context.Lessons
+                .Include(l => l.Module)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (lesson == null)
             {

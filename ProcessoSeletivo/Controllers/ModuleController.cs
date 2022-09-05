@@ -19,15 +19,14 @@ namespace ProcessoSeletivo.Controllers
             _context = context;
         }
 
-        // GET: Modules
+        // GET: Module
         public async Task<IActionResult> Index()
         {
-            return _context.Modules != null ?
-                        View(await _context.Modules.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Modules'  is null.");
+            var applicationDbContext = _context.Modules.Include(x => x.Course);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Modules/Details/5
+        // GET: Module/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Modules == null)
@@ -36,6 +35,7 @@ namespace ProcessoSeletivo.Controllers
             }
 
             var @module = await _context.Modules
+                .Include(x => x.Course)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (@module == null)
             {
@@ -45,30 +45,31 @@ namespace ProcessoSeletivo.Controllers
             return View(@module);
         }
 
-        // GET: Modules/Create
+        // GET: Module/Create
         public IActionResult Create()
         {
+            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Title");
             return View();
         }
 
-        // POST: Modules/Create
+        // POST: Module/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,DisplayOrder,Description")] Module @module)
+        public async Task<IActionResult> Create([Bind("Description,DisplayOrder,CourseId,Title")] Module module)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                //@module.Id = Guid.NewGuid();
-                _context.Add(@module);
+                _context.Add(module);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(@module);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Title", module.CourseId);
+            return View(module);
         }
 
-        // GET: Modules/Edit/5
+        // GET: Module/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Modules == null)
@@ -81,15 +82,16 @@ namespace ProcessoSeletivo.Controllers
             {
                 return NotFound();
             }
+            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Title", @module.CourseId);
             return View(@module);
         }
 
-        // POST: Modules/Edit/5
+        // POST: Module/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Description,DisplayOrder,Title,Id")] Module @module)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Description,DisplayOrder,CourseId,Title,Id")] Module @module)
         {
             if (id != @module.Id)
             {
@@ -116,10 +118,11 @@ namespace ProcessoSeletivo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Title", @module.CourseId);
             return View(@module);
         }
 
-        // GET: Modules/Delete/5
+        // GET: Module/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Modules == null)
@@ -128,6 +131,7 @@ namespace ProcessoSeletivo.Controllers
             }
 
             var @module = await _context.Modules
+                .Include(x => x.Course)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (@module == null)
             {
@@ -137,7 +141,7 @@ namespace ProcessoSeletivo.Controllers
             return View(@module);
         }
 
-        // POST: Modules/Delete/5
+        // POST: Module/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
