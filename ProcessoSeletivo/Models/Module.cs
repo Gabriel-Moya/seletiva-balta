@@ -23,9 +23,10 @@ namespace ProcessoSeletivo.Models
 
         [DisplayName("Curso")]
         [Required(ErrorMessage = "A escolha de um curso é obrigatória")]
+
         public Guid CourseId { get; set; }
 
         [DisplayName("Cursos")]
-        public Course Course { get; set; }
+        public virtual Course? Course { get; set; }
     }
 }

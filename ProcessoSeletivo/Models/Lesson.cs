@@ -16,6 +16,6 @@ namespace ProcessoSeletivo.Models
         public Guid ModuleId { get; set; }
 
         [DisplayName("Módulo")]
-        public virtual Module Module { get; set; }
+        public virtual Module? Module { get; set; }
     }
 }
