@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProcessoSeletivo.Data;
@@ -5,6 +6,7 @@ using ProcessoSeletivo.Models;
 
 namespace ProcessoSeletivo.Controllers
 {
+    [Authorize]
     public class CourseController : Controller
     {
         private readonly ApplicationDbContext _context;
