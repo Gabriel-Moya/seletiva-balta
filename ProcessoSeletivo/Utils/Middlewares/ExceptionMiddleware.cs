@@ -18,6 +18,7 @@
             catch (Exception ex)
             {
                 MeuLog.Instance().Log = ex.ToString();
+                throw;
             }
         }
     }
