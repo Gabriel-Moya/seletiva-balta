@@ -4,16 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Listagem de cursos</h1>
+<hr/>
+<input type="button" class="btn btn-primary" value="Criar curso" onclick="location.href='@Url.Action("Create", "Course" )'" />
+<input type="button" class="btn btn-primary mx-2" value="Criar modulo para curso existente" onclick="location.href='@Url.Action("Create", "Module" )'" />
+<hr />
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Tag)
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Summary)
@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.DurationInMinutes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Tag)
             </th>
             <th></th>
         </tr>
@@ -31,7 +31,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Tag)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Summary)
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.DurationInMinutes)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.Tag)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

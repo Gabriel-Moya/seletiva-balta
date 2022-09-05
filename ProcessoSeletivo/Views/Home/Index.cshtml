@@ -1,8 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Balta.io";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bem vindo!</h1>
+    <p>Plataforma do instrutor | balta.io</p>
+    <hr/>
+    <p>Vamos começar criando um novo curso?</p>
+    <div>
+        <input type="button" class="btn btn-primary" value="Criar curso" onclick="location.href='@Url.Action("Create", "Course" )'" />
+    </div>
 </div>

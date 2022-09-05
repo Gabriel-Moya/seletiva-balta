@@ -51,7 +51,7 @@ namespace ProcessoSeletivo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Tag,Summary,DurationInMinutes,Title,Id")] Course course)
+        public async Task<IActionResult> Create([Bind("Title,Summary,DurationInMinutes,Tag")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace ProcessoSeletivo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Tag,Summary,DurationInMinutes,Title,Id")] Course course)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Title,Summary,DurationInMinutes,Tag")] Course course)
         {
             if (id != course.Id)
             {
