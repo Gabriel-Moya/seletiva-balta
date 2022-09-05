@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - TempDesafioBalta
+name: Build and deploy ASP.Net Core app to Azure Web App - desafiobaltaio
 
 on:
   push:
@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'desafiobaltaio'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1ADD1FC43006431995A4574875C084BF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6FF2E2BAB7B04F229FF57C2DC42FE285 }}
           package: .
