@@ -85,7 +85,7 @@ namespace ProcessoSeletivo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Title,Summary,DurationInMinutes,Tag")] Course course)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Title,Summary,DurationInMinutes,Tag,Id")] Course course)
         {
             if (id != course.Id)
             {
